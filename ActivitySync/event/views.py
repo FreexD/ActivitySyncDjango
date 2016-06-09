@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from rest_framework import generics
 
 from ActivitySync.event.models import Event
@@ -20,16 +22,19 @@ class FilterEventListView(EventListView):
         if discipline_id is not None:
             queryset = queryset.filter(discipline__id=discipline_id)
 
-        # since = self.request.query_params.get('since', None)
-        #
-        # if since is not None:
-        #     queryset = queryset.filter(date__gt=since)
-        #
-        # to = self.request.query_params.get('since', None)
-        #
-        # if to is not None:
-        #     queryset = queryset.filter(date__lt=to)
-        #
+        since = self.request.query_params.get('since', None)
+
+        if since is not None:
+            since = since.replace('T', ' ').replace('"', '').replace('Z', '')
+            since_date = datetime.strptime(since, '%Y-%m-%d %H:%M:%S.%f')
+            queryset = queryset.filter(date__gt=since_date)
+
+        to = self.request.query_params.get('to', None)
+
+        if to is not None:
+            to = to.replace('T', ' ').replace('"', '').replace('Z', '')
+            to_date = datetime.strptime(to, '%Y-%m-%d %H:%M:%S.%f')
+            queryset = queryset.filter(date__lt=to_date)
 
         address = self.request.query_params.get('address', None)
 
