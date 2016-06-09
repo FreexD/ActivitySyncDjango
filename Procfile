@@ -1,0 +1,1 @@
+web: gunicorn bucket_counter.wsgi --log-file -

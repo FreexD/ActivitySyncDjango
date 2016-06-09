@@ -1,0 +1,14 @@
+# Install with: `pip install -r requirements.txt`
+
+# Infrastructure
+django
+psycopg2
+
+# Django REST Framework
+djangorestframework
+drfdocs
+
+# Deployment
+gunicorn
+dj-database-url
+whitenoise
