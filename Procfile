@@ -1,1 +1,1 @@
-web: gunicorn bucket_counter.wsgi --log-file -
+web: gunicorn ActivitySync.wsgi --log-file -
