@@ -8,7 +8,7 @@ from ActivitySync.user.models import UserProfile
 class UserTestCase(TestCase):
     def setUp(self):
         u = User.objects.create_user('adam')
-        u.profile = UserProfile.objects.create()
+        u.profile = UserProfile.objects.create(user=u)
 
     def test_user_profile_defaults_set_properly(self):
         u = User.objects.get(username='adam')
